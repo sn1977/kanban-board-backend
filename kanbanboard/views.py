@@ -41,6 +41,6 @@ class TicketListView(APIView):
 
     def get(self, request, format=None):
        
-        tickets = Ticket.objects.filter(crated_by=request.user)
+        tickets = Ticket.objects.filter(created_by=request.user)
         serializer = TicketListSerializer(tickets, many=True)
         return Response(serializer.data)

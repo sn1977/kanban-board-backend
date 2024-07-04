@@ -35,12 +35,12 @@ class LoginView(ObtainAuthToken):
 
 
 class TicketListView(APIView):
-    authentication_classes = [authentication.TokenAuthentication]
-    # authentication_classes = [TokenAuthentication]
+    # authentication_classes = [authentication.TokenAuthentication]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
        
-        tickets = Ticket.objects.all()
+        tickets = Ticket.objects.filter(crated_by=request.user)
         serializer = TicketListSerializer(tickets, many=True)
         return Response(serializer.data)

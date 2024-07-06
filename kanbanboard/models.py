@@ -11,6 +11,7 @@ class Ticket(models.Model):
     priority = models.CharField(max_length=30)
     column_id = models.IntegerField()
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_by_username = models.CharField(blank=True, max_length=150)
     assigned_to = models.CharField(max_length=30)
     
     def __str__(self) -> str:

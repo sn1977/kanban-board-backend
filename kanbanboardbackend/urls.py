@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from kanbanboard.views import LoginView, TicketListView
+from kanbanboard.views import LoginView, TicketCreateView, TicketListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view()),
     path('tickets/', TicketListView.as_view()),
+    path('api/tickets/create/', TicketCreateView.as_view(), name='ticket-create'),
 ]

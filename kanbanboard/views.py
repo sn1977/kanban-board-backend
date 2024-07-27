@@ -46,13 +46,26 @@ class TicketListView(APIView):
         return Response(serializer.data)
       
       
+# class TicketCreateView(APIView):
+#     authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request, format=None):
+#         serializer = TicketCreateSerializer(data=request.data, context={'request': request})
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class TicketCreateView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def post(self, request, format=None):
+        print(request.data)  # Debug-Log für empfangene Daten
         serializer = TicketCreateSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)  # Debug-Log für Fehlerdetails
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

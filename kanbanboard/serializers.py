@@ -23,7 +23,8 @@ class TicketListSerializer(serializers.ModelSerializer):
 class TicketCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['title', 'description', 'due_date', 'priority', 'column_id']
+        # fields = ['title', 'description', 'due_date', 'priority', 'column_id']
+        fields = "__all__"
 
     def create(self, validated_data):
         validated_data['created_by'] = self.context['request'].user

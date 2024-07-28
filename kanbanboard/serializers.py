@@ -13,8 +13,8 @@ class TicketListSerializer(serializers.ModelSerializer):
   def get_due_date(self, obj):
     return obj.due_date  
   
-  # def get_created_by_name(self, obj):
-  #       return obj.get_created_by_name()
+  def get_created_by_username(self, obj):
+        return obj.get_created_by_username()
       
   class Meta:
     model = Ticket

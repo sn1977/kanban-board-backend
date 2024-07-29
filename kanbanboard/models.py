@@ -9,7 +9,7 @@ class Ticket(models.Model):
     created_at = models.DateField(default=datetime.date.today)
     due_date = models.DateField()
     priority = models.CharField(max_length=30)
-    column_id = models.IntegerField()
+    column_id = models.CharField(max_length=30)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_by_username = models.CharField(blank=True, max_length=150)
     # assigned_to = models.CharField(max_length=30)

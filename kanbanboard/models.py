@@ -12,6 +12,7 @@ class Ticket(models.Model):
     column_id = models.CharField(max_length=30)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_by_username = models.CharField(blank=True, max_length=150)
+    color = models.CharField(blank=True, max_length=30)
     # assigned_to = models.CharField(max_length=30)
     
     def __str__(self) -> str:

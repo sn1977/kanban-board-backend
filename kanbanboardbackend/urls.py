@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from kanbanboard.views import LoginView, TicketCreateView, TicketDetailView, TicketListView
+from kanbanboard.views import LoginView, RegisterView, TicketCreateView, TicketDetailView, TicketListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('tickets/', TicketListView.as_view()),
     path('api/tickets/create/', TicketCreateView.as_view(), name='ticket-create'),
     path('tickets/<int:pk>/', TicketDetailView.as_view(), name='ticket-detail'),
+    path('register/', RegisterView.as_view(), name='register'),
 ]

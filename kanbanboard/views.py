@@ -8,7 +8,8 @@ from rest_framework import authentication, permissions, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from kanbanboard.models import Ticket
-from kanbanboard.serializers import TicketCreateSerializer, TicketListSerializer
+from kanbanboard.serializers import RegisterSerializer, TicketCreateSerializer, TicketListSerializer
+from rest_framework.permissions import AllowAny  # Füge dies hinzu
 
 # Create your views here.
 
@@ -223,3 +224,22 @@ class TicketDetailView(APIView):
     ticket = self.get_object(pk)
     ticket.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+class RegisterView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            token, created = Token.objects.get_or_create(user=user)
+            return Response(
+                {
+                    "token": token.key,
+                    "user_id": user.pk,
+                    "username": user.username,
+                },
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

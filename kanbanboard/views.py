@@ -227,7 +227,7 @@ class TicketDetailView(APIView):
 
 class RegisterView(APIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
     def post(self, request, format=None):
         serializer = RegisterSerializer(data=request.data)
